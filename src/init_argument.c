@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:05:22 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/17 19:43:24 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/21 23:04:51 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	init_forks(t_simulation *simulation)
 	while (i < simulation->num_philosophers)
 	{
 		if (pthread_mutex_init(&simulation->fork[i], NULL) != 0)
+		{
+			destroy_resources(simulation);
 			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	return (EXIT_SUCCESS);

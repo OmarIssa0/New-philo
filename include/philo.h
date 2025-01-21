@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:29:42 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/21 17:03:14 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/21 23:21:40 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_simulation
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					num_each_eat;
-	pthread_mutex_t		*fork; // ? 5 -> 5 fork and 5 philo
+	pthread_mutex_t		*fork;
 	t_philosophers		*philosopher;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		data_lock;

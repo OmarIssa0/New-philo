@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:06:59 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/21 21:50:54 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/21 23:19:06 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ long long	time_of_philo(void)
 	return (current_time);
 }
 
-void	precise_sleep(long long start_time, long long duration_ms, t_philosophers *philo)
+void	precise_sleep(long long start_time, long long duration_ms,
+						t_philosophers *philo)
 {
 	long long	end_time;
 
@@ -33,9 +34,9 @@ void	precise_sleep(long long start_time, long long duration_ms, t_philosophers *
 		if (!philo->simulation->is_running)
 		{
 			pthread_mutex_unlock(&philo->simulation->data_lock);
-			break;
+			break ;
 		}
 		pthread_mutex_unlock(&philo->simulation->data_lock);
-		usleep(100);
+		usleep(1);
 	}
 }

@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread
 RM = rm -f
 NAME = philo
 
+# ! Src file
 SRC = src/main.c 				\
 	  src/ft_atol_handle.c 		\
 	  src/destroy_resources.c 	\
