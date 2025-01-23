@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:28:05 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/23 19:48:13 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 20:55:31 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ static int	check_died(t_simulation *simulation, int i)
 	{
 		simulation->is_running = false;
 		pthread_mutex_unlock(&simulation->data_lock);
-		
 		pthread_mutex_lock(&simulation->print_mutex);
 		printf(RED "%lld\t%d  died" RESET "\n", time_of_philo()
 			- simulation->start_time, simulation->philosopher[i].id);
 		pthread_mutex_unlock(&simulation->print_mutex);
-		// pthread_mutex_unlock(&simulation->data_lock);
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_unlock(&simulation->data_lock);
@@ -33,12 +31,9 @@ static int	check_died(t_simulation *simulation, int i)
 }
 
 void	*monitor_death(t_simulation *simulation)
-// void	*monitor_death(void *arg)
 {
-	int				i;
-	// t_simulation	*simulation;
+	int	i;
 
-	// simulation = (t_simulation *)arg;
 	while (1)
 	{
 		i = 0;
@@ -48,7 +43,6 @@ void	*monitor_death(t_simulation *simulation)
 				return (NULL);
 			i++;
 		}
-		
 		pthread_mutex_lock(&simulation->data_lock);
 		if (simulation->num_each_eat != -1 && all_philosophers_ate(simulation))
 		{
@@ -57,7 +51,7 @@ void	*monitor_death(t_simulation *simulation)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&simulation->data_lock);
-		// usleep(1000);
+		usleep(1000);
 	}
 	return (NULL);
 }

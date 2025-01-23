@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:54:21 by oissa             #+#    #+#             */
-/*   Updated: 2024/11/16 15:57:47 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 20:50:12 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,19 @@ long	ft_atol_handle(const char *str, int *valid)
 	int		sign;
 	size_t	i;
 	long	result;
+	int		index;
 
+	index = 0;
 	*valid = 1;
+	while (str[index] != '\0')
+	{
+		if (!ft_isdigit(str[index]))
+		{
+			*valid = 0;
+			return (0);
+		}
+		index++;
+	}
 	i = handle_initial(str, &sign);
 	if (!is_valid_length(str, i))
 	{
