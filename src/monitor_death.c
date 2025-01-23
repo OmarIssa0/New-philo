@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:28:05 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/21 23:06:50 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 19:48:13 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,27 @@ static int	check_died(t_simulation *simulation, int i)
 	if (time_of_philo()
 		- simulation->philosopher[i].last_meal_time > simulation->time_to_die)
 	{
+		simulation->is_running = false;
+		pthread_mutex_unlock(&simulation->data_lock);
+		
 		pthread_mutex_lock(&simulation->print_mutex);
 		printf(RED "%lld\t%d  died" RESET "\n", time_of_philo()
 			- simulation->start_time, simulation->philosopher[i].id);
 		pthread_mutex_unlock(&simulation->print_mutex);
-		simulation->is_running = false;
-		pthread_mutex_unlock(&simulation->data_lock);
+		// pthread_mutex_unlock(&simulation->data_lock);
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_unlock(&simulation->data_lock);
-	usleep(1000);
 	return (EXIT_SUCCESS);
 }
 
-void	*monitor_death(void *arg)
+void	*monitor_death(t_simulation *simulation)
+// void	*monitor_death(void *arg)
 {
 	int				i;
-	t_simulation	*simulation;
+	// t_simulation	*simulation;
 
-	simulation = (t_simulation *)arg;
+	// simulation = (t_simulation *)arg;
 	while (1)
 	{
 		i = 0;
@@ -46,6 +48,7 @@ void	*monitor_death(void *arg)
 				return (NULL);
 			i++;
 		}
+		
 		pthread_mutex_lock(&simulation->data_lock);
 		if (simulation->num_each_eat != -1 && all_philosophers_ate(simulation))
 		{
@@ -54,6 +57,7 @@ void	*monitor_death(void *arg)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&simulation->data_lock);
+		// usleep(1000);
 	}
 	return (NULL);
 }

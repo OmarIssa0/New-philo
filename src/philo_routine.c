@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:29:41 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/21 17:04:04 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 18:25:38 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ static void	if_philo_num_one(t_philosophers *philo)
 	pthread_mutex_lock(philo->left_fork);
 	pthread_mutex_lock(&philo->simulation->print_mutex);
 	if (philo->simulation->is_running)
-		printf(GREEN "%lld\t%d  has taken a fork" RESET "\n",
+		printf( "%lld\t%d  has taken a fork"  "\n",
 			time_of_philo() - philo->simulation->start_time,
 			philo->id);
+		// printf(GREEN "%lld\t%d  has taken a fork" RESET "\n",
+		// 	time_of_philo() - philo->simulation->start_time,
+		// 	philo->id);
 	pthread_mutex_unlock(&philo->simulation->print_mutex);
 	precise_sleep(time_of_philo(), philo->simulation->time_to_die, philo);
 	pthread_mutex_unlock(philo->left_fork);

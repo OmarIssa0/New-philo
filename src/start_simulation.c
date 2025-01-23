@@ -6,30 +6,30 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 18:21:02 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/19 00:31:28 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 18:04:59 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static int	pthread_monitor(t_simulation *simulation, pthread_t *threads,
-		pthread_t monitor_thread)
+static int	pthread_monitor(t_simulation *simulation, pthread_t *threads)
 {
 	int	i;
 
-	if (pthread_create(&monitor_thread, NULL, monitor_death, simulation) != 0)
-	{
-		printf("ERROR: Failed to create monitor thread\n");
-		free(threads);
-		return (EXIT_FAILURE);
-	}
+	// if (pthread_create(&monitor_thread, NULL, monitor_death, simulation) != 0)
+	// {
+	// 	printf("ERROR: Failed to create monitor thread\n");
+	// 	free(threads);
+	// 	return (EXIT_FAILURE);
+	// }
+	monitor_death(simulation);
 	i = 0;
 	while (i < simulation->num_philosophers)
 	{
 		pthread_join(threads[i], NULL);
 		i++;
 	}
-	pthread_join(monitor_thread, NULL);
+	// pthread_join(monitor_thread, NULL);
 	free(threads);
 	return (EXIT_SUCCESS);
 }
@@ -37,11 +37,11 @@ static int	pthread_monitor(t_simulation *simulation, pthread_t *threads,
 int	start_simulation(t_simulation *simulation)
 {
 	pthread_t	*threads;
-	pthread_t	monitor_thread;
+	// pthread_t	monitor_thread;
 	int			i;
 
 	i = 0;
-	monitor_thread = 0;
+	// monitor_thread = 0;
 	threads = malloc(sizeof(pthread_t) * simulation->num_philosophers);
 	if (!threads)
 		return (EXIT_FAILURE);
@@ -57,7 +57,7 @@ int	start_simulation(t_simulation *simulation)
 		}
 		i++;
 	}
-	if (pthread_monitor(simulation, threads, monitor_thread) == EXIT_FAILURE)
+	if (pthread_monitor(simulation, threads) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

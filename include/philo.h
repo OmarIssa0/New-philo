@@ -6,7 +6,7 @@
 /*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:29:42 by oissa             #+#    #+#             */
-/*   Updated: 2025/01/21 23:21:40 by oissa            ###   ########.fr       */
+/*   Updated: 2025/01/23 18:04:27 by oissa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,15 @@ int						init_argument(t_simulation *simulation, int ac,
 							char **av);
 int						init_forks(t_simulation *simulation);
 int						init_philosophers(t_simulation *simulation);
-void					*monitor_death(void *arg);
+void					*monitor_death(t_simulation *simulation);
+// void					*monitor_death(void *arg);
 void					*philo_routine(void *arg);
 bool					all_philosophers_ate(t_simulation *simulation);
 int						start_simulation(t_simulation *simulation);
 long long				time_of_philo(void);
 int						start_simulation(t_simulation *simulation);
 bool					all_philosophers_ate(t_simulation *simulation);
-void					*monitor_death(void *arg);
+// void					*monitor_death(void *arg);
 void					*philo_routine(void *arg);
 void					thinking_philo(t_philosophers *philo);
 void					eating_philo(t_philosophers *philo);
